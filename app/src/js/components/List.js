@@ -2,6 +2,7 @@
 var React = require('react');
 var ShowForm = require('./ShowForm');
 var AddBuddy = require('./AddBuddy');
+var BuddyList = require('./BuddyList');
 
 var List = React.createClass({
 	getInitialState: function(){
@@ -24,6 +25,8 @@ var List = React.createClass({
 				</div>
 
 				<AddBuddy display={this.state.formDisplayed} />	
+				<br />
+				<BuddyList />
 			</div>	
 		);
 	}
