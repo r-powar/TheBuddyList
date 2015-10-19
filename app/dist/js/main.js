@@ -3,8 +3,20 @@
 var React = require('react');
 
 var AddBuddy = React.createClass({displayName: "AddBuddy",
-	formSubmission: function(event){
-		event.preventDefault();
+	formSubmission: function(evnt){
+		evnt.preventDefault();
+
+		var newBuddy = {
+			userName: this.refs.username.getDOMNode().value,
+			firstName: this.refs.firstName.getDOMNode().value,
+			lastName: this.refs.lastName.getDOMNode().value,
+			email: this.refs.email.getDOMNode().value,
+			date: this.refs.birthdate.getDOMNode().value,
+			bio: this.refs.bio.getDOMNode().value
+		}
+
+		this.refs.addBuddyForm.getDOMNode().reset();
+		this.props.onNewBuddy(newBuddy);
 	},
 
 	render: function(){
@@ -36,6 +48,18 @@ module.exports = AddBuddy;
 /** @jsx React.DOM */
 var React = require('react');
 
+var BuddyItem = React.createClass({displayName: "BuddyItem",
+
+	render: function(){
+
+		return(
+			React.createElement("li", null
+			
+			)
+		);
+	}
+});
+
 },{"react":162}],3:[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react'),
@@ -44,15 +68,14 @@ var React = require('react'),
 var BuddyList = React.createClass({displayName: "BuddyList",
 
 	render: function(){
-		var buddyDetails = this.props.details.map(function(details){
+		var buddyDetails = this.props.buddyList.map(function(items){
 
-			return React.createElement(BuddyItem, {username: details.username, firstName: details.firstname, lastName: details.lastname, status: details.status})
+			return React.createElement(BuddyItem, {username: items.username, firstName: items.firstName, lastName: items.lastName, status: items.status})
 		});
 
 		return(
 			React.createElement("div", {className: "container"}, 
-				React.createElement("ul", {className: "list-group"}, 
-					buddyDetails
+				React.createElement("ul", {className: "list-group"}
 				)
 			)
 		);
@@ -71,7 +94,12 @@ var BuddyList = require('./BuddyList');
 
 var List = React.createClass({displayName: "List",
 	getInitialState: function(){
+		var Items = [
+			{ username:'rpowar', firstName:'Raj', lastName: 'Powar', email:'abc@cue.edu', date:'11102015', bio:'Testing it out'},
+			{ username:'jdoe', firstName:'John', lastName: 'Doe', email:'jdoe@xcs.edu', date:'12042014', bio:'John Doe test data'},
+		];
 		return{
+			items: Items,
 			formDisplayed: false
 		}
 	},
@@ -82,6 +110,14 @@ var List = React.createClass({displayName: "List",
 		});
 	},
 
+	onNewBuddy: function(newBuddy){
+		var newBuddy = this.state.items.concat([newBuddy]);
+		this.setState({
+			items: newBuddy,
+			formDisplayed: false,
+		});
+	},
+
 	render: function(){
 		return(
 			React.createElement("div", null, 
@@ -89,9 +125,9 @@ var List = React.createClass({displayName: "List",
 					React.createElement(ShowForm, {display: this.state.formDisplayed, onToggleForm: this.onToggle})
 				), 
 
-				React.createElement(AddBuddy, {display: this.state.formDisplayed}), 	
+				React.createElement(AddBuddy, {display: this.state.formDisplayed, onNewBuddy: this.onNewBuddy}), 	
 				React.createElement("br", null), 
-				React.createElement(BuddyList, null)
+				React.createElement(BuddyList, {buddyList: this.state.items})
 			)	
 		);
 	}

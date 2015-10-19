@@ -2,8 +2,20 @@
 var React = require('react');
 
 var AddBuddy = React.createClass({
-	formSubmission: function(event){
-		event.preventDefault();
+	formSubmission: function(evnt){
+		evnt.preventDefault();
+
+		var newBuddy = {
+			userName: this.refs.username.getDOMNode().value,
+			firstName: this.refs.firstName.getDOMNode().value,
+			lastName: this.refs.lastName.getDOMNode().value,
+			email: this.refs.email.getDOMNode().value,
+			date: this.refs.birthdate.getDOMNode().value,
+			bio: this.refs.bio.getDOMNode().value
+		}
+
+		this.refs.addBuddyForm.getDOMNode().reset();
+		this.props.onNewBuddy(newBuddy);
 	},
 
 	render: function(){

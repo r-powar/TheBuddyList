@@ -6,7 +6,12 @@ var BuddyList = require('./BuddyList');
 
 var List = React.createClass({
 	getInitialState: function(){
+		var Items = [
+			{ username:'rpowar', firstName:'Raj', lastName: 'Powar', email:'abc@cue.edu', date:'11102015', bio:'Testing it out'},
+			{ username:'jdoe', firstName:'John', lastName: 'Doe', email:'jdoe@xcs.edu', date:'12042014', bio:'John Doe test data'},
+		];
 		return{
+			items: Items,
 			formDisplayed: false
 		}
 	},
@@ -17,6 +22,14 @@ var List = React.createClass({
 		});
 	},
 
+	onNewBuddy: function(newBuddy){
+		var newBuddy = this.state.items.concat([newBuddy]);
+		this.setState({
+			items: newBuddy,
+			formDisplayed: false,
+		});
+	},
+
 	render: function(){
 		return(
 			<div>
@@ -24,9 +37,9 @@ var List = React.createClass({
 					<ShowForm display={this.state.formDisplayed} onToggleForm={this.onToggle} />
 				</div>
 
-				<AddBuddy display={this.state.formDisplayed} />	
+				<AddBuddy display={this.state.formDisplayed} onNewBuddy={this.onNewBuddy} />	
 				<br />
-				<BuddyList />
+				<BuddyList buddyList={this.state.items} />
 			</div>	
 		);
 	}

@@ -5,15 +5,14 @@ var React = require('react'),
 var BuddyList = React.createClass({
 
 	render: function(){
-		var buddyDetails = this.props.details.map(function(details){
+		var buddyDetails = this.props.buddyList.map(function(items){
 
-			return <BuddyItem username={details.username} firstName={details.firstname} lastName={details.lastname} status={details.status} />
+			return <BuddyItem username={items.username} firstName={items.firstName} lastName={items.lastName} status={items.status} />
 		});
 
 		return(
 			<div className="container">
 				<ul className="list-group">
-					{buddyDetails}
 				</ul>
 			</div>
 		);
