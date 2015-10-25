@@ -57,17 +57,28 @@ var BuddyItem = React.createClass({displayName: "BuddyItem",
 			'btn': true,
 			'btn-success': (this.props.status == "Available"),
 			'btn-danger': (this.props.status == "Offline"),
-			'btn-warning': (this.props.status == "Away" || this.props.status == "Idle")
+			'btn-warning': (this.props.status == "Away" || this.props.status == "Idle"),
+			'btn-xs': true
 		});
 
 		return(
 			React.createElement("li", {className: "list-group-item"}, 
-				React.createElement("span", null, "Username:", this.props.username), 
-				React.createElement("span", null, "First Name:", this.props.firstName), 
-				React.createElement("span", null, "Last Name:", this.props.lastName), 
-				React.createElement("span", null, 
+				React.createElement("div", {className: "items col-md-3"}, React.createElement("p", null, "Username: ", this.props.username)), 
+				React.createElement("div", {className: "items col-md-3"}, React.createElement("p", null, "First Name: ", this.props.firstName)), 
+				React.createElement("div", {className: "items col-md-3"}, React.createElement("p", null, "Last Name: ", this.props.lastName)), 
+				React.createElement("div", {className: "items"}, 
 					React.createElement("button", {className: statusColoring}, this.props.status)
+				), 
+				React.createElement("div", {className: "items"}, 
+					React.createElement("span", {className: "glyphicon glyphicon-plus-sign"})
+				), 
+				React.createElement("div", {className: "items"}, 
+					React.createElement("span", {className: "glyphicon glyphicon-remove-circle"})
+				), 
+				React.createElement("div", {className: "items"}, 
+					React.createElement("span", {className: "glyphicon glyphicon-arrow-up"})
 				)
+
 			)
 		);
 	}
