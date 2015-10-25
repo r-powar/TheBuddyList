@@ -7,9 +7,10 @@ var BuddyList = require('./BuddyList');
 var List = React.createClass({
 	getInitialState: function(){
 		var Items = [
-			{ username:'rpowar', firstName:'Raj', lastName: 'Powar', email:'abc@cue.edu', date:'11102015', bio:'Testing it out'},
-			{ username:'jdoe', firstName:'John', lastName: 'Doe', email:'jdoe@xcs.edu', date:'12042014', bio:'John Doe test data'},
-		];
+			{ username:'rpowar', firstName:'Raj', lastName: 'Powar', email:'abc@cue.edu', date:'11102015', bio:'Testing it out', status:"Available"},
+			{ username:'jdoe', firstName:'John', lastName: 'Doe', email:'jdoe@xcs.edu', date:'12042014', bio:'John Doe test data', status:"Offline"},
+			{ username:'jane', firstName:'Jane', lastName: 'Matthews', email:'janem@xu.edu', date:'12082014', bio:'Jane Matthews test data', status:"Idle"}
+		];	
 		return{
 			items: Items,
 			formDisplayed: false
